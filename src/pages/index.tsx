@@ -32,6 +32,7 @@ const claudeOptions = [
 
 export default function Home() {
   const [clipboard, setClipboard] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
   const [elonCheck, setElonCheck] = useState(true);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [length, setLength] = useState(70);
@@ -60,7 +61,12 @@ export default function Home() {
   });
 
   function copyToClipboard() {
-    navigator.clipboard.writeText(clipboard);
+    navigator.clipboard.writeText(clipboard).then(() => {
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000); // resets the copied status after 2 seconds
+    });
   }
 
   useEffect(() => {
@@ -233,11 +239,15 @@ export default function Home() {
                       <div className="text-md">Feedback</div>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div>
-                        <button className="flex items-center" onClick={copyToClipboard}>
-                          <ClipboardCopyIcon className="w-4 h-4 text-slate-800" />
-                        </button>
-                      </div>
+                      {isCopied && (
+                        <span className="flex items-center py-1 px-2 border border-transparent text-sm font-xs rounded-full text-green-600 bg-green-200">
+                          <CheckIcon />
+                          Copied!
+                        </span>
+                      )}
+                      <button className="flex items-center justify-center p-2 rounded-full transition-all hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#CB785C]" onClick={copyToClipboard}>
+                        <ClipboardCopyIcon className="w-4 h-4 text-slate-800" />
+                      </button>
                     </div>
                   </div>
                   <div className="px-4 py-2.5 text-sm">
