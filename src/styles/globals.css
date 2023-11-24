@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.card-shadow {
+    box-shadow: 0 1px 1px -1px rgba(0, 0, 0, .08), 0 2px 2px -1px rgba(0, 0, 0, .08), 0 0 0 1px rgba(0, 0, 0, .06), inset 0 1px 0 #fff, inset 0 1px 2px 1px #fff, inset 0 1px 2px rgba(0, 0, 0, .06);
+}
+
+@font-face {
+    font-family: 'Geist Sans';
+    src: url(/GeistVariableVF.ttf);
+}
+
+@layer base {
+    html, body {
+        font-family: 'Geist Sans', sans-serif;
+    }
+    .dot-background {
+        background-image: radial-gradient(circle, #ececec 1px, transparent 0);
+        background-size: 22px 22px;
+    }    
+}
